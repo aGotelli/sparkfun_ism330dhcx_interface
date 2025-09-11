@@ -15,9 +15,9 @@ Ensure that the CH341A adapter is set to i2c mode via the spi/i2c selector pins 
 The ISM330DHCX has two possible i2c addresses, 0x6b (default, ISM330DHCX_ADDRESS_HIGH) and 0x6a (bridged, ISM330DHCX_ADDRESS_LOW). The are selected via some soldered pads on the flip side of the chip. In order to use two sensors on the same bus, they must have different addresses. 
 
 ### Driver installation 
-Some additional steps were required to get the [USB to serial adapters](https://www.amazon.ca/gp/product/B0B72K6VTW/?AssociateTag=sacsite05-20&tag=sacsite05-20) working. Specifically, an adapted i2c-ch341-usb driver. This is not native to linux and the current version is outdated, using an old GPIO library. After removing it, the driver appears to build and load properly. This updated driver is included in the driver folder. To install, 
+Some additional steps were required to get the [USB to serial adapters](https://www.amazon.ca/gp/product/B0B72K6VTW/?AssociateTag=sacsite05-20&tag=sacsite05-20) working. Specifically, an adapted i2c-ch341-usb driver. This is not native to linux and the current version is outdated, using an old GPIO library. After removing it, the driver appears to build and load properly, albeit losing any GPIO functionality. This updated driver is included in the driver folder. To install, 
 ```
-cd driver/i2c-ch341-usb 
+cd driver
 sudo make install
 ```
 To confirm it installed properly, run 
