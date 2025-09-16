@@ -1,6 +1,22 @@
+# ISM330DHCX Interface
+
 This repo is an interface for logging data from the [SparkFun ISM330DHCX 9DoF Accel/Gyro/Mag](https://www.sparkfun.com/sparkfun-6dof-imu-breakout-ism330dhcx-qwiic.html) on a linux PC using the [WWZMDiB CH341A USB to UART/IIC/SPI/TTL/ISP Adapter](https://manuals.plus/asin/B0BVH6BCF5). It contains an adapted version of the [ISM330DHCX Arduino interface](https://github.com/sparkfun/SparkFun_6DoF_ISM330DHCX_Arduino_Library/tree/main) which removes the requirement of an Arduino. 
 
 With this setup, two sensors can collect gyro data on the same bus at a rate of 380Hz. The Arduino approach appears to max out at 100Hz with a single sensor. The theoretical max rate of the sensor is 6667Hz (though I've never seen an example above 200Hz, so I'm not convinced this is possible given the breakout board.)
+
+This project provides a cross-platform interface for the ISM330DHCX 6-axis IMU sensor, supporting both Windows and Linux platforms with different I2C interfaces.
+
+## Platform Support
+
+### Windows
+- **I2C Interface**: CH341 USB-to-I2C adapter using DLL
+- **Driver**: CH341DLLA64.dll (included in lib/ directory)
+- **Requirements**: CH341 driver from [WCH website](https://www.wch-ic.com/downloads/CH341PAR_EXE.html)
+
+### Linux  
+- **I2C Interface**: Native Linux I2C (/dev/i2c-*)
+- **Driver**: Custom i2c-ch341-usb driver (included in driver/ directory)
+- **Requirements**: I2C permissions and CH341 driver installation
 
 ## Setup Instructions 
 Clone this repository 

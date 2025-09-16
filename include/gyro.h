@@ -4,7 +4,6 @@
 #include <iostream>
 #include <fstream>
 #include <thread>
-#include <boost/asio.hpp>
 #include "Wire.h"
 #include "SparkFun_ISM330DHCX.h"
 

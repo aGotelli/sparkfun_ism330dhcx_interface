@@ -1,7 +1,6 @@
 #include <thread>
 #include <chrono>
 #include <cstdlib>
-#include <libudev.h>
 #include <boost/bind/bind.hpp>
 
 #include "gyro.h"
