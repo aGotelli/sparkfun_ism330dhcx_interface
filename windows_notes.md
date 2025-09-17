@@ -1,0 +1,4 @@
+- Install driver from [here](https://www.wch-ic.com/downloads/CH341PAR_EXE.html)
+- Can check that device is connected via device manager (Interface -> USB...CH341 -> oem63.inf (ch341wdm.imf))
+- Vibe coded pretty much everything. Only thing left to do is install boost library on windows and test the actual logging (main.cpp) 
+- see the copilot chat for context   
