@@ -1,7 +1,8 @@
 #include <thread>
 #include <chrono>
 #include <cstdlib>
-#include <boost/bind/bind.hpp>
+#include <functional>
+#include <cassert>
 
 #include "gyro.h"
 
@@ -18,7 +19,7 @@ void GyroAPI::startUpdateLoop(char *folder_name)
 
     m_last_times.push_back(0);
   }
-  m_thread = std::thread(boost::bind(&GyroAPI::gyro_thread, this));
+  m_thread = std::thread(std::bind(&GyroAPI::gyro_thread, this));
 }
 
 void GyroAPI::setRecord(bool value, int frequency)
@@ -30,7 +31,20 @@ void GyroAPI::setRecord(bool value, int frequency)
 void GyroAPI::add_device(uint8_t address)
 {
   SparkFun_ISM330DHCX *new_device = new SparkFun_ISM330DHCX();
-  new_device->begin(m_wire, address);
+  new_device->begin(m_wire, address);  
+  
+  uint8_t who_am_i = new_device->getUniqueId();
+  if (who_am_i == 0x6b) {
+    m_devices.push_back(new_device);
+    std::cout << "✓ Added device with address 0x" << std::hex << (int)address << std::dec << std::endl;
+    std::cout << "  Device will log to sensor" << m_devices.size() - 1 << ".csv" << std::endl;
+  } else {
+    std::cout << "✗ Device at address 0x" << std::hex << (int)address << std::dec 
+              << " not responding correctly (WHO_AM_I = 0x" << std::hex << (int)who_am_i 
+              << std::dec << ", expected 0x6B)" << std::endl;
+    delete new_device; // Clean up the unused device
+  }
+
   new_device->setDeviceConfig();
   new_device->setBlockDataUpdate();
 
@@ -41,12 +55,6 @@ void GyroAPI::add_device(uint8_t address)
   // Turn on the gyroscope's filter and apply settings.
   new_device->setGyroFilterLP1();
   new_device->setGyroLP1Bandwidth(ISM_MEDIUM);
-  m_devices.push_back(new_device);
-
-  uint8_t who_am_i = new_device->getUniqueId();
-  assert(new_device->getUniqueId() == 0x6b && "Who am I register returned incorrect value. Expected 0x6b.");
-  std::cout << "Added device with address 0x" << std::hex << (int)address << std::endl;
-  std::cout << "This device will log to sensor" << m_devices.size() - 1 << ".csv" << std::endl;
 }
 
 void GyroAPI::flush()
@@ -65,8 +73,10 @@ void GyroAPI::join()
 
 bool GyroAPI::statusCheck()
 {
-  if (m_devices.size() == 0)
+  if (m_devices.size() == 0) {
+    std::cout << "No ISM330DHCX devices detected. Please check connections." << std::endl;
     return false;
+  }
   // Check connection status of all devices
   for (auto &device : m_devices)
     if (!device->isConnected())
@@ -102,8 +112,6 @@ void GyroAPI::gyro_thread()
         double current_rate = 1000000000.0 / (now_time - m_last_times[index]);
         std::cout << "\rCurrent rate: " << current_rate << " Hz     " << std::flush;
         m_last_times[index] = now_time;
-
-        bool success;
 
         if (m_devices[index]->checkGyroStatus())
         {

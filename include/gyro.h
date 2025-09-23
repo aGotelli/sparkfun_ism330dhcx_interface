@@ -4,16 +4,24 @@
 #include <iostream>
 #include <fstream>
 #include <thread>
+#include <vector>
 #include "Wire.h"
 #include "SparkFun_ISM330DHCX.h"
 
 class GyroAPI
 {
 public:
+#ifdef __linux__
     GyroAPI(const char *i2c_path = "/dev/i2c-16") : m_wire(i2c_path)
     {
         m_wire.begin();
     }
+#elif defined(_WIN32)
+    GyroAPI(const char *device_name = "CH341") : m_wire(device_name)
+    {
+        m_wire.begin();
+    }
+#endif
     ~GyroAPI()
     {
         m_wire.end();

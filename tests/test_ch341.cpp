@@ -1,10 +1,7 @@
 #include <iostream>
-
-
+#include "Wire.h"
 
 #ifdef _WIN32
-    #include "platform/windows/ch341_wrapper.h"
-    
     int main() {
         CH341Wrapper ch341;
         
@@ -80,8 +77,6 @@
     }
 
 #elif defined(__linux__)
-    #include "Wire.h"
-    
     int main() {
         std::cout << "Testing ISM330DHCX sensor on Linux platform..." << std::endl;
         
