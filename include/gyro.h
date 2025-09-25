@@ -19,7 +19,7 @@ public:
 #elif defined(_WIN32)
     GyroAPI(const char *device_name = "CH341") : m_wire(device_name)
     {
-        m_wire.begin();
+        
     }
 #endif
     ~GyroAPI()
@@ -35,6 +35,8 @@ public:
     bool statusCheck();
     void flush();
     void join();
+
+    bool checkRegister(uint8_t address, uint8_t reg, uint8_t expected);
 
 private:
     void gyro_thread();

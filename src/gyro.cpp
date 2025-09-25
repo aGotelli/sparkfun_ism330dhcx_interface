@@ -28,33 +28,101 @@ void GyroAPI::setRecord(bool value, int frequency)
   m_frequency = frequency;
 }
 
-void GyroAPI::add_device(uint8_t address)
+bool GyroAPI::checkRegister(uint8_t address, uint8_t reg, uint8_t expected)
 {
-  SparkFun_ISM330DHCX *new_device = new SparkFun_ISM330DHCX();
-  new_device->begin(m_wire, address);  
-  
-  uint8_t who_am_i = new_device->getUniqueId();
-  if (who_am_i == 0x6b) {
-    m_devices.push_back(new_device);
-    std::cout << "✓ Added device with address 0x" << std::hex << (int)address << std::dec << std::endl;
-    std::cout << "  Device will log to sensor" << m_devices.size() - 1 << ".csv" << std::endl;
-  } else {
-    std::cout << "✗ Device at address 0x" << std::hex << (int)address << std::dec 
-              << " not responding correctly (WHO_AM_I = 0x" << std::hex << (int)who_am_i 
-              << std::dec << ", expected 0x6B)" << std::endl;
-    delete new_device; // Clean up the unused device
+
+  m_wire.beginTransmission(address);
+  m_wire.write(reg);
+  if (m_wire.endTransmission() == -1)
+  {
+    std::cout << "[GRYO] Check register failed for register 0x" << std::hex << (int)reg << std::endl;
+    return false;
+  }
+  m_wire.requestFrom(address, 1);
+  uint8_t read = m_wire.read();
+  std::cout << "Checking register...\n";
+  std::cout << "-- reg 0x" << std::hex << (int)reg
+            << "\n-- read: 0x" << (int)read
+            << "\n-- expected: 0x" << (int)expected << std::endl;
+
+  if (!(read == expected))
+  {
+    return false;
   }
 
-  new_device->setDeviceConfig();
-  new_device->setBlockDataUpdate();
+  return true;
+}
 
-  // Set the output data rate and precision of the gyroscope
-  new_device->setGyroDataRate(ISM_GY_ODR_6667Hz);
-  new_device->setGyroFullScale(ISM_250dps);
+void GyroAPI::add_device(uint8_t address)
+{
+  std::cout << "add_device called.\n";
+  SparkFun_ISM330DHCX *new_device = new SparkFun_ISM330DHCX();
+  if (!new_device->begin(m_wire, address))
+    std::cout << "[ERROR] SparkFun_ISM330DHCX init() failed.\n";
 
-  // Turn on the gyroscope's filter and apply settings.
-  new_device->setGyroFilterLP1();
-  new_device->setGyroLP1Bandwidth(ISM_MEDIUM);
+  std::cout << "post new_device.begin()\n";
+  if (!new_device->deviceReset())
+  {
+    std::cout << "[GYRO] Failed to reset device.\n";
+    delete new_device;
+    return;
+  }
+
+  uint8_t who_am_i = new_device->getUniqueId();
+  if (who_am_i != 0x6b)
+  {
+    std::cout << "WHO_AM_I failed.\n";
+    delete new_device;
+    return;
+  }
+  
+  std::cout << "[GYRO] Trying to enter configuration mode from the sensor api\n";
+  if (!new_device->setDeviceConfig())
+  {
+    std::cout << "[GYRO] setDeviceConfig failed.\n";
+    delete new_device;
+    return;
+  } // 0x18 R/W
+  checkRegister(address, 0x18, 0xe2);
+
+  if (!new_device->setBlockDataUpdate())
+  {
+    std::cout << "[GYRO] setBlockDataUpdate failed.\n";
+    delete new_device;
+    return;
+  } // 0x12 R/W
+  if (!new_device->setGyroDataRate(ISM_GY_ODR_3332Hz))
+  {
+    std::cout << "[GYRO] setGyroDataRate failed.\n";
+    delete new_device;
+    return;
+  } //
+  if (!new_device->setGyroFullScale(ISM_250dps))
+  {
+    std::cout << "[GYRO] setGyroFullScale failed.\n";
+    delete new_device;
+    return;
+  } // 0x11 R/W
+  checkRegister(address, 0x11, (ISM_GY_ODR_3332Hz << 4) | ISM_250dps);
+
+  if (!new_device->setGyroFilterLP1())
+  {
+    std::cout << "[GYRO] setGyroFilterLP1 failed.\n";
+    delete new_device;
+    return;
+  } // 0x13 R/W
+  if (!new_device->setGyroLP1Bandwidth(ISM_MEDIUM))
+  {
+    std::cout << "[GYRO] setGyroLP1Bandwidth failed.\n";
+    delete new_device;
+    return;
+  } // 0x15 R/W
+  checkRegister(address, 0x15, ISM_MEDIUM);
+
+  // If successful
+  m_devices.push_back(new_device);
+  std::cout << "✓ Added device with address 0x" << std::hex << (int)address << std::dec << std::endl;
+  std::cout << "  Device will log to sensor" << m_devices.size() - 1 << ".csv" << std::endl;
 }
 
 void GyroAPI::flush()
@@ -73,7 +141,8 @@ void GyroAPI::join()
 
 bool GyroAPI::statusCheck()
 {
-  if (m_devices.size() == 0) {
+  if (m_devices.size() == 0)
+  {
     std::cout << "No ISM330DHCX devices detected. Please check connections." << std::endl;
     return false;
   }
@@ -113,11 +182,23 @@ void GyroAPI::gyro_thread()
         std::cout << "\rCurrent rate: " << current_rate << " Hz     " << std::flush;
         m_last_times[index] = now_time;
 
-        if (m_devices[index]->checkGyroStatus())
+        // Test: bypass status check and try to read gyro data directly
+        bool bypassStatusCheck = false;
+        if (bypassStatusCheck || m_devices[index]->checkGyroStatus())
         {
+          if (bypassStatusCheck)
+          {
+            std::cout << "[GYRO] BYPASSING status check, trying direct data read..." << std::endl;
+          }
+          else
+          {
+            std::cout << "[GYRO] Status check: Data ready for device " << index << std::endl;
+          }
           sfe_ism_data_t gyroData;
           m_devices[index]->getGyro(&gyroData);
           now_time = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+
+          std::cout << "[GYRO] Data: X=" << gyroData.xData << " Y=" << gyroData.yData << " Z=" << gyroData.zData << std::endl;
 
           *m_file_streams[index] << now_time
                                  << "," << gyroData.xData
@@ -126,7 +207,7 @@ void GyroAPI::gyro_thread()
         }
         else
         {
-          std::cout << "Gyro data not ready. Data will not be logged.\n";
+          std::cout << "[GYRO] Status check: Gyro data not ready for device " << index << ". Data will not be logged.\n";
         }
       }
     }

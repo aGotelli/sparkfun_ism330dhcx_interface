@@ -61,12 +61,17 @@ target_link_libraries(sparkfun_ism330dhcx ${CMAKE_THREAD_LIBS_INIT})
 
 # Platform-specific linking
 if(WIN32)
-    # Windows: Copy DLL to output directory for runtime
-    add_custom_command(TARGET sparkfun_ism330dhcx POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        "${PROJECT_SOURCE_DIR}/lib/CH341DLLA64.dll"
-        $<TARGET_FILE_DIR:sparkfun_ism330dhcx>
+    # Windows: Link against 64-bit CH341 library (A64 suffix)
+    add_library(CH341 SHARED IMPORTED)
+    set_target_properties(CH341 PROPERTIES
+        IMPORTED_LOCATION "${PROJECT_SOURCE_DIR}/driver/ch341_windows/CH341DLLA64.DLL"
+        IMPORTED_IMPLIB "${PROJECT_SOURCE_DIR}/driver/ch341_windows/CH341DLLA64.LIB"
+        INTERFACE_INCLUDE_DIRECTORIES "${PROJECT_SOURCE_DIR}/driver/ch341_windows/include"
     )
+    target_link_libraries(sparkfun_ism330dhcx CH341)
+    
+    # Add the include directory to the main target as well
+    target_include_directories(sparkfun_ism330dhcx PRIVATE "${PROJECT_SOURCE_DIR}/driver/ch341_windows/include")
 endif()
 
 # Test executables

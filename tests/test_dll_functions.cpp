@@ -19,7 +19,7 @@ int main() {
     std::vector<std::string> commonFunctions = {
         "CH341OpenDevice", "CH341CloseDevice", "CH341GetVersion",
         "CH341GetDeviceCount", "CH341SetStream", "CH341ReadI2C",
-        "CH341WriteI2C", "CH341StreamSPI4", "CH341StreamSPI5",
+        "CH341WriteI2C", "CH341StreamI2C", "CH341StreamSPI4", "CH341StreamSPI5",
         "CH341SetOutput", "CH341GetInput", "CH341ReadData", 
         "CH341WriteData", "CH341ResetDevice", "CH341GetStatus",
         "CH341SetTimeout", "CH341FlushBuffer", "CH341GetDeviceName",
