@@ -28,7 +28,7 @@ int main(int argc, char **argv)
 #endif
 
     // Try both possible addresses
-    // gyro_api.add_device(ISM330DHCX_ADDRESS_LOW); // Soldered address (0x6A)
+    gyro_api.add_device(ISM330DHCX_ADDRESS_LOW); // Soldered address (0x6A)
     gyro_api.add_device(ISM330DHCX_ADDRESS_HIGH); // Default (unsoldered) address (0x6B)
 
     // Check if any devices were successfully detected

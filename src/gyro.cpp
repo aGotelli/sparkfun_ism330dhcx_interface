@@ -55,12 +55,10 @@ bool GyroAPI::checkRegister(uint8_t address, uint8_t reg, uint8_t expected)
 
 void GyroAPI::add_device(uint8_t address)
 {
-  std::cout << "add_device called.\n";
   SparkFun_ISM330DHCX *new_device = new SparkFun_ISM330DHCX();
   if (!new_device->begin(m_wire, address))
     std::cout << "[ERROR] SparkFun_ISM330DHCX init() failed.\n";
 
-  std::cout << "post new_device.begin()\n";
   if (!new_device->deviceReset())
   {
     std::cout << "[GYRO] Failed to reset device.\n";
@@ -68,6 +66,7 @@ void GyroAPI::add_device(uint8_t address)
     return;
   }
 
+  // Confirm communication is established 
   uint8_t who_am_i = new_device->getUniqueId();
   if (who_am_i != 0x6b)
   {
@@ -75,8 +74,7 @@ void GyroAPI::add_device(uint8_t address)
     delete new_device;
     return;
   }
-  
-  std::cout << "[GYRO] Trying to enter configuration mode from the sensor api\n";
+
   if (!new_device->setDeviceConfig())
   {
     std::cout << "[GYRO] setDeviceConfig failed.\n";
@@ -190,22 +188,13 @@ void GyroAPI::gyro_thread()
         m_last_times[index] = now_time;
 
         // Test: bypass status check and try to read gyro data directly
-        bool bypassStatusCheck = false;
-        if (bypassStatusCheck || m_devices[index]->checkGyroStatus())
+        if (m_devices[index]->checkGyroStatus())
         {
-          if (bypassStatusCheck)
-          {
-            std::cout << "[GYRO] BYPASSING status check, trying direct data read..." << std::endl;
-          }
-          else
-          {
-            std::cout << "[GYRO] Status check: Data ready for device " << index << std::endl;
-          }
           sfe_ism_data_t gyroData;
           m_devices[index]->getGyro(&gyroData);
           now_time = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 
-          std::cout << "[GYRO] Data: X=" << gyroData.xData << " Y=" << gyroData.yData << " Z=" << gyroData.zData << std::endl;
+          // std::cout << "[GYRO] Data: X=" << gyroData.xData << " Y=" << gyroData.yData << " Z=" << gyroData.zData << std::endl;
 
           *m_file_streams[index] << now_time
                                  << "," << gyroData.xData
