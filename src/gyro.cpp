@@ -137,6 +137,13 @@ void GyroAPI::join()
 {
   if (m_thread.joinable())
     m_thread.join();
+
+  for (auto &device : m_devices)
+  {
+    device->deviceReset(); 
+    delete device; 
+  }
+  m_wire.end(); 
 }
 
 bool GyroAPI::statusCheck()

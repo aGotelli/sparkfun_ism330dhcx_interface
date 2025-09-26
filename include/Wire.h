@@ -37,7 +37,7 @@ public:
             return;
         }
 
-        if (!CH341SetStream(0, 1))
+        if (!CH341SetStream(0, 3))
         { // Set I2C mode
             std::cerr << "Failed to set I2C mode" << std::endl;
             CH341CloseDevice(0);
@@ -143,13 +143,14 @@ public:
             //           << " reg 0x" << std::hex << (int)lastRegisterAddress << std::dec << std::endl;
         // }
 
-        std::vector<unsigned char> buffer(numBytes);
+        std::vector<unsigned char> buffer(numBytes); 
 
-        bool success = true;
+        bool success = true; 
         for (int i = 0; i < numBytes; i++)
         {
             uint8_t read_byte;
             success = success & CH341ReadI2C(0, address, lastRegisterAddress, &read_byte);
+            lastRegisterAddress += 0x1; 
             buffer[i] = read_byte;
         }
 
