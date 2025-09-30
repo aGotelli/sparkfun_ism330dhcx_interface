@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 project(sparkfun_ism330dhcx_interface)
 
-set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_BUILD_TYPE Release)
 set(CMAKE_CXX_STANDARD 20)
 
 # Platform detection for informational purposes and platform-specific settings
@@ -44,20 +44,29 @@ foreach(file ${ALL_CPP_FILES})
     message(STATUS "  ${file}")
 endforeach()
 
+
+# Find Required files
+find_package(Boost REQUIRED)
+find_package(Threads REQUIRED)
+
 # Main executable
 add_executable(sparkfun_ism330dhcx main.cpp ${ALL_H_FILES} ${ALL_CPP_FILES})
+target_link_libraries(sparkfun_ism330dhcx ${CMAKE_THREAD_LIBS_INIT})
+
+# TCP Server
+add_executable(sparkfun_tcp_server sparkfun_tcp_server.cpp ${ALL_H_FILES} ${ALL_CPP_FILES})
+target_link_libraries(sparkfun_tcp_server ${CMAKE_THREAD_LIBS_INIT})
 
 # Optional libraries
-find_package(Boost REQUIRED)
 if(Boost_FOUND)
     target_link_libraries(sparkfun_ism330dhcx ${Boost_LIBRARIES})
+    target_link_libraries(sparkfun_tcp_server ${Boost_LIBRARIES})
     message(STATUS "Found Boost libraries")
 else()
     message(WARNING "Boost libraries not found - building without Boost")
 endif()
 
-find_package(Threads REQUIRED)
-target_link_libraries(sparkfun_ism330dhcx ${CMAKE_THREAD_LIBS_INIT})
+
 
 # Platform-specific linking
 if(WIN32)
@@ -69,6 +78,7 @@ if(WIN32)
         INTERFACE_INCLUDE_DIRECTORIES "${PROJECT_SOURCE_DIR}/driver/ch341_windows/include"
     )
     target_link_libraries(sparkfun_ism330dhcx CH341)
+    target_link_libraries(sparkfun_tcp_server CH341)
     
     # Add the include directory to the main target as well
     target_include_directories(sparkfun_ism330dhcx PRIVATE "${PROJECT_SOURCE_DIR}/driver/ch341_windows/include")

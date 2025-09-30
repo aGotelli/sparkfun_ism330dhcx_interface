@@ -117,6 +117,8 @@ void GyroAPI::add_device(uint8_t address)
   } // 0x15 R/W
   checkRegister(address, 0x15, ISM_MEDIUM);
 
+  /// TODO: Set up accelerometer 
+
   // If successful
   m_devices.push_back(new_device);
   std::cout << "✓ Added device with address 0x" << std::hex << (int)address << std::dec << std::endl;
@@ -196,10 +198,20 @@ void GyroAPI::gyro_thread()
 
           // std::cout << "[GYRO] Data: X=" << gyroData.xData << " Y=" << gyroData.yData << " Z=" << gyroData.zData << std::endl;
 
-          *m_file_streams[index] << now_time
-                                 << "," << gyroData.xData
-                                 << "," << gyroData.yData
-                                 << "," << gyroData.zData << "," << std::endl;
+          // *m_file_streams[index] << now_time
+          //                        << "," << gyroData.xData
+          //                        << "," << gyroData.yData
+          //                        << "," << gyroData.zData << "," << std::endl;
+
+          // TODO: Log accelerometer if wanted 
+          // sfe_ism_data_t accelData;
+          // m_devices[index]->getAccel(&accelData);
+          
+          // now_time = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+          // *m_file_streams[index] << now_time
+          //                        << "," << accelData.xData
+          //                        << "," << accelData.yData
+          //                        << "," << accelData.zData << "," << std::endl;
         }
         else
         {

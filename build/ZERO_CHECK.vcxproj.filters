@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\crladmin\Desktop\dataset_CR_dynamics\sparkfun_ism330dhcx_interface\build\CMakeFiles\230b3a955aea98db2e5f0094de06a0c6\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{78FD1EE6-E369-3685-8C04-801DE690408B}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

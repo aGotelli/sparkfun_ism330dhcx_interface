@@ -1,0 +1,520 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				},
+				{
+					"build" : "tests",
+					"jsonFile" : "directory-tests-Debug-70e4927a02b591d5c1f8.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "tests",
+					"targetIndexes" : 
+					[
+						4,
+						5,
+						6,
+						7
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1
+					],
+					"name" : "sparkfun_ism330dhcx_interface",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ALL_BUILD-Debug-8fd624ad01ffc7e05af4.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ZERO_CHECK-Debug-638dc9b5e80c6b7fd661.json",
+					"name" : "ZERO_CHECK",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "sparkfun_ism330dhcx::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-sparkfun_ism330dhcx-Debug-5053f1b2aad7aec58de4.json",
+					"name" : "sparkfun_ism330dhcx",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "sparkfun_tcp_server::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-sparkfun_tcp_server-Debug-9ac79150c492fb52297e.json",
+					"name" : "sparkfun_tcp_server",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "test_ch341::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-test_ch341-Debug-72076040cd90f1c5b204.json",
+					"name" : "test_ch341",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "test_dll_functions::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-test_dll_functions-Debug-3d63b3a070e71fe1713d.json",
+					"name" : "test_dll_functions",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "test_simple_unified::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-test_simple_unified-Debug-2ea083455ba1b92c4cb5.json",
+					"name" : "test_simple_unified",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "test_unified_api::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-test_unified_api-Debug-99002da969f6cadcd2d0.json",
+					"name" : "test_unified_api",
+					"projectIndex" : 0
+				}
+			]
+		},
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"jsonFile" : "directory-.-Release-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				},
+				{
+					"build" : "tests",
+					"jsonFile" : "directory-tests-Release-70e4927a02b591d5c1f8.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "tests",
+					"targetIndexes" : 
+					[
+						4,
+						5,
+						6,
+						7
+					]
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1
+					],
+					"name" : "sparkfun_ism330dhcx_interface",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ALL_BUILD-Release-8fd624ad01ffc7e05af4.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ZERO_CHECK-Release-638dc9b5e80c6b7fd661.json",
+					"name" : "ZERO_CHECK",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "sparkfun_ism330dhcx::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-sparkfun_ism330dhcx-Release-3dd32763ee6a6aa461fc.json",
+					"name" : "sparkfun_ism330dhcx",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "sparkfun_tcp_server::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-sparkfun_tcp_server-Release-5c6bba18afd9240570ff.json",
+					"name" : "sparkfun_tcp_server",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "test_ch341::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-test_ch341-Release-9cd21b67b174026f61d0.json",
+					"name" : "test_ch341",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "test_dll_functions::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-test_dll_functions-Release-1275a4163f72c7cf1cc0.json",
+					"name" : "test_dll_functions",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "test_simple_unified::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-test_simple_unified-Release-869e220af8ffedaa5a94.json",
+					"name" : "test_simple_unified",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "test_unified_api::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-test_unified_api-Release-415c57e2f309c9da4d6b.json",
+					"name" : "test_unified_api",
+					"projectIndex" : 0
+				}
+			]
+		},
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"jsonFile" : "directory-.-MinSizeRel-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				},
+				{
+					"build" : "tests",
+					"jsonFile" : "directory-tests-MinSizeRel-70e4927a02b591d5c1f8.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "tests",
+					"targetIndexes" : 
+					[
+						4,
+						5,
+						6,
+						7
+					]
+				}
+			],
+			"name" : "MinSizeRel",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1
+					],
+					"name" : "sparkfun_ism330dhcx_interface",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ALL_BUILD-MinSizeRel-8fd624ad01ffc7e05af4.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ZERO_CHECK-MinSizeRel-638dc9b5e80c6b7fd661.json",
+					"name" : "ZERO_CHECK",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "sparkfun_ism330dhcx::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-sparkfun_ism330dhcx-MinSizeRel-a2062bf28fce51bcb3ea.json",
+					"name" : "sparkfun_ism330dhcx",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "sparkfun_tcp_server::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-sparkfun_tcp_server-MinSizeRel-a6668f9e07f9814f0ebc.json",
+					"name" : "sparkfun_tcp_server",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "test_ch341::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-test_ch341-MinSizeRel-e8ae5dcd7edafbd79ab0.json",
+					"name" : "test_ch341",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "test_dll_functions::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-test_dll_functions-MinSizeRel-ca7d2d3d6bd9d34ff3e1.json",
+					"name" : "test_dll_functions",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "test_simple_unified::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-test_simple_unified-MinSizeRel-7fd573d5868489ce8d71.json",
+					"name" : "test_simple_unified",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "test_unified_api::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-test_unified_api-MinSizeRel-10226fd7fdfc1cd1056a.json",
+					"name" : "test_unified_api",
+					"projectIndex" : 0
+				}
+			]
+		},
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"jsonFile" : "directory-.-RelWithDebInfo-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				},
+				{
+					"build" : "tests",
+					"jsonFile" : "directory-tests-RelWithDebInfo-70e4927a02b591d5c1f8.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "tests",
+					"targetIndexes" : 
+					[
+						4,
+						5,
+						6,
+						7
+					]
+				}
+			],
+			"name" : "RelWithDebInfo",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1
+					],
+					"name" : "sparkfun_ism330dhcx_interface",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ALL_BUILD-RelWithDebInfo-8fd624ad01ffc7e05af4.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ZERO_CHECK-RelWithDebInfo-638dc9b5e80c6b7fd661.json",
+					"name" : "ZERO_CHECK",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "sparkfun_ism330dhcx::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-sparkfun_ism330dhcx-RelWithDebInfo-9ea3be3db43ec9b23a41.json",
+					"name" : "sparkfun_ism330dhcx",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "sparkfun_tcp_server::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-sparkfun_tcp_server-RelWithDebInfo-d8ec2591b20bd2e5c860.json",
+					"name" : "sparkfun_tcp_server",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "test_ch341::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-test_ch341-RelWithDebInfo-af05a8088abd9b138752.json",
+					"name" : "test_ch341",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "test_dll_functions::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-test_dll_functions-RelWithDebInfo-e2f0bbc08eedfdc6e662.json",
+					"name" : "test_dll_functions",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "test_simple_unified::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-test_simple_unified-RelWithDebInfo-f7888c2b54c6353afd7c.json",
+					"name" : "test_simple_unified",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "test_unified_api::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-test_unified_api-RelWithDebInfo-3b5cc31e08c500b088b8.json",
+					"name" : "test_unified_api",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/crladmin/Desktop/dataset_CR_dynamics/sparkfun_ism330dhcx_interface/build",
+		"source" : "C:/Users/crladmin/Desktop/dataset_CR_dynamics/sparkfun_ism330dhcx_interface"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

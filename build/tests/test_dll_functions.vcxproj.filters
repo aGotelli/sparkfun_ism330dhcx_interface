@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\crladmin\Desktop\dataset_CR_dynamics\sparkfun_ism330dhcx_interface\tests\test_dll_functions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\crladmin\Desktop\dataset_CR_dynamics\sparkfun_ism330dhcx_interface\tests\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{E023438B-5778-3C27-8AE5-5E8BC49638D1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
